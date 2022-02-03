@@ -26,12 +26,13 @@ public class Question
    public string question;
    public string[] m_answers;
    public int m_rightAns;
-
+    public int m_chosenAns;
     public Question()
     {
         question = string.Empty;
         m_answers = new string[4];
         m_rightAns = 0;
+        m_chosenAns = -1;
     }
 
 }
