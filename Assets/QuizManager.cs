@@ -26,6 +26,8 @@ public class QuizManager : MonoBehaviour
     private int currentQuestion =0;
 
     Quiz quizito;
+
+    //Creates a new quiz. Called before filling out answers
     public void Save()
     {
         quizito = new Quiz(
@@ -34,6 +36,8 @@ public class QuizManager : MonoBehaviour
             randomize.isOn
             );
     }
+
+    //Sets all toggles off except for the clicked one
     public void updateToggles(int toggleToChange)
     {
         for (int i = 0; i < correctAnswers.Length; i++)
@@ -43,6 +47,7 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    //Allows navigation between quiz questions, displaying on UI the current question's contents
     public void changeQuestion(int moveBy)
     {
         currentQuestion += moveBy;
@@ -52,18 +57,35 @@ public class QuizManager : MonoBehaviour
             return;
         }
 
+        //Update questions on UI
+        questionName.text = quizito.m_questions[currentQuestion].question;
+
+        //Update answers on UI
         for (int i = 0; i < answers.Length; i++)
         {
             answers[i].text = quizito.m_questions[currentQuestion].m_answers[i];
         }
+        //Update current Question's UI
         currentQuestionText.text = (currentQuestion+1).ToString();
+
+
+        //TO DO
+        //Update correct toggle selections for current answer
     }
 
+    //Stores the current UI´s data onto the quiz instance
     public void UpdateQuestion()
     {
+        //SAve questions from UI
+        quizito.m_questions[currentQuestion].question =questionName.text;
+
+        //Update answers from UI
         for (int i = 0; i < answers.Length; i++)
         {
             quizito.m_questions[currentQuestion].m_answers[i] = answers[i].text;
         }
+
+        //TO DO
+        //Savee correct toggle selections for current answer
     }
 }
